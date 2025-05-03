@@ -23,7 +23,6 @@ const errorFlags = {
     firstNameFlag: false,
     lastNameFlag: false,
     addressOneFlag: false,
-    addressTwoFlag: true,
     cityFlag: false,
     stateFlag: false,
     zipFlag: false,
