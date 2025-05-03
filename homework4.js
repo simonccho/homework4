@@ -537,7 +537,7 @@ function isRememberChecked() {
 
 document.getElementById("rememberLogin").addEventListener("change", function () {
     const rememberChecked = this.checked;
-    setCookie("rememberLogin", rememberChecked, 10);
+    setCookie("rememberLogin", rememberChecked, 2);
 });
 
 window.addEventListener("load", function () {
@@ -610,7 +610,7 @@ function getData(key) {
             return getCookie(key);
         }
     } else {
-        return ""; // Don't return stored data if not remembering
+        return "";
     }
 }
 
