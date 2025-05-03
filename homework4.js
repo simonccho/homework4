@@ -18,32 +18,6 @@ function slide(x)
     }
 }
 
-// Error flags
-const errorFlags = {
-    firstNameFlag: false,
-    middleInitialFlag: true,
-    lastNameFlag: false,
-    addressOneFlag: false,
-    addressTwoFlag: true,
-    cityFlag: false,
-    stateFlag: false,
-    zipFlag: false,
-    phoneFlag: false,
-    emailFlag: false,
-    SSNFlag: false,
-    userIDFlag: false,
-    passwordFlag: false,
-    passwordCheckFlag: false,
-    dateOfBirthFlag: false
-};
-
-// Check if all flags are true and enable/disable submit button
-function checkFlags() {
-    const submitButton = document.getElementById("submit");
-    const flags = Object.values(errorFlags);
-    const allFlagsValid = flags.every(flag => flag === true);
-    submitButton.disabled = !allFlagsValid;
-}
 
 // persistent header
 window.onscroll = function() {myFunction()};
@@ -440,7 +414,7 @@ function dateOfBirthValidation() {
 }
 
 // get user data
-function getData() {
+function displayData() {
     var formcontent = document.getElementById("signup");
     var formoutput;
     var datatype;
@@ -477,6 +451,82 @@ function getData() {
         formoutput += "</table>";
         document.getElementById("outputformdata").innerHTML = formoutput;
     }
+}
+
+// validate all inputs
+function validateAll() {
+    let valid = true;
+    if (!firstNameValidation()) {
+        valid = false;
+    }
+    if (!lastNameValidation()) {
+        valid = false;
+    }
+    if (!addressOneValidation()) { 
+        valid = false;
+    }
+    if (!zipValidation()) {
+        valid = false;
+    }
+    if (!phoneValidation()) {
+        valid = false;
+    }
+    if (!emailValidation()) {
+        valid = false;
+    }
+    if (!SSNValidation()) {
+        valid = false;
+    }
+    if (!userValidation()) {
+        valid = false;
+    }
+    if (!passwordValidation()) {
+        valid = false;
+    }
+    if (!passwordCheckValidation()) {
+        valid = false;
+    }
+    if (!dateOfBirthValidation()) {
+        valid = false;
+    }
+    if (!cityValidation()) {
+        valid = false;
+    }
+    if (!stateValidation()) {
+        valid = false;
+    }
+    if (valid) {
+        document.getElementById("submit").disabled = false;
+    } else {
+        alert("Please fix any indicated errors");
+    }
+}
+
+// error flags
+const errorFlags = {
+    firstNameFlag: false,
+    middleInitialFlag: true,
+    lastNameFlag: false,
+    addressOneFlag: false,
+    addressTwoFlag: true,
+    cityFlag: false,
+    stateFlag: false,
+    zipFlag: false,
+    phoneFlag: false,
+    emailFlag: false,
+    SSNFlag: false,
+    userIDFlag: false,
+    passwordFlag: false,
+    passwordCheckFlag: false,
+    dateOfBirthFlag: false
+};
+
+// check if all flags are true and enable/disable submit button
+function checkFlags() {
+    const submitButton = document.getElementById("submit");
+    const flags = Object.values(errorFlags);
+    const allFlagsValid = flags.every(flag => flag === true);
+    submitButton.disabled = !allFlagsValid;
 }
 
 // cookie functions
@@ -533,6 +583,7 @@ function getData(key) {
     }
 }
 
+
 // greeting
 var firstName = getData("firstName");
 if (firstName !== null && firstName !== "") {
@@ -553,21 +604,6 @@ if (firstName !== null && firstName !== "") {
     document.getElementById("greeting").innerHTML = "Welcome, new user!";
 }
 
-// input data array
-var inputs = [
-    { id: "firstName", dataKey: "firstName", validation: firstNameValidation },
-    { id: "middleInitial", dataKey: "middleInitial", validation: middleInitialValidation },
-    { id: "lastName", dataKey: "lastName", validation: lastNameValidation },
-    { id: "addressLine1", dataKey: "addressLine1", validation: addressOneValidation },
-    { id: "addressLine2", dataKey: "addressLine2", validation: addressTwoValidation },
-    { id: "city", dataKey: "city", validation: cityValidation },
-    { id: "state", dataKey: "state", validation: stateValidation },
-    { id: "zip", dataKey: "zip", validation: zipValidation },
-    { id: "phone", dataKey: "phone", validation: phoneValidation },
-    { id: "email", dataKey: "email", validation: emailValidation },
-    { id: "userID", dataKey: "userID", validation: userValidation },
-];
-
 // load data into form
 inputs.forEach(function (input) {
     var inputElement = document.getElementById(input.id);
@@ -584,55 +620,3 @@ inputs.forEach(function (input) {
         checkFlags();
     });
 });
-
-// validate all inputs
-function validateAll() {
-    let valid = true;
-    if (!firstNameValidation()) {
-        valid = false;
-    }
-    if (!lastNameValidation()) {
-        valid = false;
-    }
-    if (!addressOneValidation()) { 
-        valid = false;
-    }
-    if (!zipValidation()) {
-        valid = false;
-    }
-    if (!phoneValidation()) {
-        valid = false;
-    }
-    if (!emailValidation()) {
-        valid = false;
-    }
-    if (!SSNValidation()) {
-        valid = false;
-    }
-    if (!userValidation()) {
-        valid = false;
-    }
-    if (!passwordValidation()) {
-        valid = false;
-    }
-    if (!passwordCheckValidation()) {
-        valid = false;
-    }
-    if (!dateOfBirthValidation()) {
-        valid = false;
-    }
-    if (!addressOneValidation()) {
-        valid = false;
-    }
-    if (!cityValidation()) {
-        valid = false;
-    }
-    if (!stateValidation()) {
-        valid = false;
-    }
-    if (valid) {
-        document.getElementById("submit").disabled = false;
-    } else {
-        alert("Please fix the indicated errors!");
-    }
-}
