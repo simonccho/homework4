@@ -18,6 +18,32 @@ function slide(x)
     }
 }
 
+// error flags
+const errorFlags = {
+    firstNameFlag: false,
+    middleInitialFlag: true,
+    lastNameFlag: false,
+    addressOneFlag: false,
+    addressTwoFlag: true,
+    cityFlag: false,
+    stateFlag: false,
+    zipFlag: false,
+    phoneFlag: false,
+    emailFlag: false,
+    SSNFlag: false,
+    userIDFlag: false,
+    passwordFlag: false,
+    passwordCheckFlag: false,
+    dateOfBirthFlag: false
+};
+
+// check if all flags are true and enable/disable submit button
+function checkFlags() {
+    const submitButton = document.getElementById("submit");
+    const flags = Object.values(errorFlags);
+    const allFlagsValid = flags.every(flag => flag === true);
+    submitButton.disabled = !allFlagsValid;
+}
 
 // persistent header
 window.onscroll = function() {myFunction()};
@@ -500,33 +526,6 @@ function validateAll() {
     } else {
         alert("Please fix any indicated errors");
     }
-}
-
-// error flags
-const errorFlags = {
-    firstNameFlag: false,
-    middleInitialFlag: true,
-    lastNameFlag: false,
-    addressOneFlag: false,
-    addressTwoFlag: true,
-    cityFlag: false,
-    stateFlag: false,
-    zipFlag: false,
-    phoneFlag: false,
-    emailFlag: false,
-    SSNFlag: false,
-    userIDFlag: false,
-    passwordFlag: false,
-    passwordCheckFlag: false,
-    dateOfBirthFlag: false
-};
-
-// check if all flags are true and enable/disable submit button
-function checkFlags() {
-    const submitButton = document.getElementById("submit");
-    const flags = Object.values(errorFlags);
-    const allFlagsValid = flags.every(flag => flag === true);
-    submitButton.disabled = !allFlagsValid;
 }
 
 // cookie functions
