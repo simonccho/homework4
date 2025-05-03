@@ -582,6 +582,35 @@ function getData(key) {
     }
 }
 
+// input data array
+var inputs = [
+    { id: "firstName", dataKey: "firstName", validation: firstNameValidation },
+    { id: "lastName", dataKey: "lastName", validation: lastNameValidation },
+    { id: "addressLine1", dataKey: "addressLine1", validation: addressOneValidation },
+    { id: "city", dataKey: "city", validation: cityValidation },
+    { id: "state", dataKey: "state", validation: stateValidation },
+    { id: "zip", dataKey: "zip", validation: zipValidation },
+    { id: "phone", dataKey: "phone", validation: phoneValidation },
+    { id: "email", dataKey: "email", validation: emailValidation },
+    { id: "userID", dataKey: "userID", validation: userValidation },
+];
+
+// load data into form
+inputs.forEach(function (input) {
+    var inputElement = document.getElementById(input.id);
+    var dataValue = getData(input.dataKey);
+    if (dataValue !== null && dataValue !== "") {
+        inputElement.value = dataValue;
+                input.validation();
+    }
+    inputElement.addEventListener("input", function () {
+        setData(input.dataKey, inputElement.value, 30);
+        if (inputElement.value !== "" && input.validation !== undefined) {
+            input.validation();
+        }
+        checkFlags();
+    });
+});
 
 // greeting
 var firstName = getData("firstName");
@@ -603,19 +632,3 @@ if (firstName !== null && firstName !== "") {
     document.getElementById("greeting").innerHTML = "Welcome, new user!";
 }
 
-// load data into form
-inputs.forEach(function (input) {
-    var inputElement = document.getElementById(input.id);
-    var dataValue = getData(input.dataKey);
-    if (dataValue !== null && dataValue !== "") {
-        inputElement.value = dataValue;
-                input.validation();
-    }
-    inputElement.addEventListener("input", function () {
-        setData(input.dataKey, inputElement.value, 30);
-        if (inputElement.value !== "" && input.validation !== undefined) {
-            input.validation();
-        }
-        checkFlags();
-    });
-});
