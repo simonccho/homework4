@@ -528,6 +528,23 @@ function validateAll() {
     }
 }
 
+// remember check box
+function isRememberChecked() {
+    var checkbox = document.getElementById("rememberLogin");
+    return checkbox && checkbox.checked;
+}
+
+document.getElementById("rememberLogin").addEventListener("change", function () {
+    const rememberChecked = this.checked;
+    setCookie("rememberLogin", rememberChecked, 10);
+});
+
+window.addEventListener("load", function () {
+    const rememberCookie = getCookie("rememberLogin");
+    document.getElementById("rememberLogin").checked = (rememberCookie === "true");
+});
+
+
 // cookie functions
 function setCookie(name, cvalue, expiryDays) {
     var day = new Date();
@@ -566,19 +583,33 @@ function isLocalStorageSupported() {
 
 // set data
 function setData(key, value, expiryDays) {
-    if (isLocalStorageSupported()) {
-        localStorage.setItem(key, value);
-    } else {
+    const remember = getCookie("rememberLogin") === "true";
+
+    if (remember) {
         setCookie(key, value, expiryDays);
+        if (isLocalStorageSupported()) {
+            localStorage.setItem(key, value);
+        }
+    } else {
+        setCookie(key, "", -1);
+        if (isLocalStorageSupported()) {
+            localStorage.removeItem(key);
+        }
     }
 }
 
 // get data
 function getData(key) {
-    if (isLocalStorageSupported()) {
-        return localStorage.getItem(key);
+    const remember = getCookie("rememberLogin") === "true";
+
+    if (remember) {
+        if (isLocalStorageSupported()) {
+            return localStorage.getItem(key) || getCookie(key);
+        } else {
+            return getCookie(key);
+        }
     } else {
-        return getCookie(key);
+        return ""; // Don't return stored data if not remembering
     }
 }
 
