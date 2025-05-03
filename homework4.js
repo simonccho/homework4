@@ -522,7 +522,7 @@ function validateAll() {
         valid = false;
     }
     if (valid) {
-        document.getElementById("submit").disabled = false;
+        document.getElementById("submit").enabled = true;
     } else {
         alert("Please fix any indicated errors");
     }
