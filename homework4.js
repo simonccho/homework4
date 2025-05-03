@@ -21,7 +21,6 @@ function slide(x)
 // error flags
 const errorFlags = {
     firstNameFlag: false,
-    middleInitialFlag: true,
     lastNameFlag: false,
     addressOneFlag: false,
     addressTwoFlag: true,
