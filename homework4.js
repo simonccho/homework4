@@ -208,7 +208,9 @@ function SSNValidation() {
         error.innerHTML = "";
         errorFlags.SSNFlag = true;
     }
+    checkFlags();
 }
+
 // city validation
 function cityValidation() {
     const city = document.getElementById("city").value;
@@ -436,6 +438,7 @@ function dateOfBirthValidation() {
         error.innerHTML = "";
         errorFlags.dateOfBirthFlag = true;
     }
+    checkFlags();
 }
 
 // get user data
